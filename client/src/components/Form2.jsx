@@ -112,8 +112,8 @@ const Form2 = () => {
                     { content: data.classification || '' }
                 ],
                 [
-                    { content: 'Habitation Name\nనివాస స్థలము' },
-                    { content: '' } // blank for now
+                    { content: 'Door No. / Habitation Name\nఇంటి నంబరు / నివాస స్థలము' },
+                    { content: data.doorNumber || '' }
                 ],
                 [
                     { content: 'Extent\nవిస్తీర్ణము' },
@@ -255,8 +255,8 @@ const Form2 = () => {
                             <td className="val-cell">{data.extent}</td>
                             <td className="th-like">Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
                             <td className="val-cell">{data.nature_of_use}</td>
-                            <td className="th-like top-border">Habitation Name<br /><span className="telugu-text">నివాస స్థలము</span></td>
-                            <td className="val-cell top-border"></td>
+                            <td className="th-like top-border">Door No. / Habitation Name<br /><span className="telugu-text">ఇంటి నంబరు / నివాస స్థలము</span></td>
+                            <td className="val-cell top-border">{data.doorNumber || ''}</td>
                         </tr>
                     </tbody>
                 </table>

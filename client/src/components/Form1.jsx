@@ -13,7 +13,8 @@ const Form1 = () => {
         surveyNumber: '',
         extent: '',
         classification: 'Agricultural', // Default as per form layout context
-        units: 'Acres', // Default unit
+        emptyField: '',
+        doorNumber: '',
         natureOfUse: '',
         date: new Date().toISOString().split('T')[0] // Default today's date
     });
@@ -124,7 +125,32 @@ const Form1 = () => {
                         </select>
                     </div>
 
+                    <div className="form-group">
+                        <label className="form-label" htmlFor="emptyField">&nbsp;</label>
+                        <input
+                            type="text"
+                            id="emptyField"
+                            name="emptyField"
+                            className="form-control"
+                            value={formData.emptyField}
+                            onChange={handleChange}
+                        />
+                    </div>
 
+                    {formData.classification === 'Residential' && (
+                        <div className="form-group full-width">
+                            <label className="form-label" htmlFor="doorNumber">Door Number</label>
+                            <input
+                                type="text"
+                                id="doorNumber"
+                                name="doorNumber"
+                                className="form-control"
+                                value={formData.doorNumber}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    )}
 
                     <div className="form-group full-width">
                         <label className="form-label" htmlFor="natureOfUse">Nature of Use</label>
