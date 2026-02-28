@@ -164,6 +164,7 @@ const Form1 = () => {
                             value={formData.date}
                             onChange={handleChange}
                             required
+                            readOnly
                         />
                     </div>
 
