@@ -119,22 +119,8 @@ const Form1 = () => {
                             required
                         >
                             <option value="Agricultural">Agricultural</option>
-                            <option value="Non-Agricultural">Non-Agricultural</option>
-                            <option value="Commercial">Commercial</option>
                             <option value="Residential">Residential</option>
                         </select>
-                    </div>
-
-                    <div className="form-group">
-                        <label className="form-label" htmlFor="emptyField">Units</label>
-                        <input
-                            type="text"
-                            id="emptyField"
-                            name="emptyField"
-                            className="form-control"
-                            value={formData.emptyField}
-                            onChange={handleChange}
-                        />
                     </div>
 
                     {formData.classification === 'Residential' && (
