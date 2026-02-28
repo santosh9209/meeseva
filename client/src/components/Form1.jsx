@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Form1 = () => {
@@ -59,6 +59,29 @@ const Form1 = () => {
             setLoading(false);
         }
     };
+
+    // Auto update date at midnight
+    useEffect(() => {
+        const updateDate = () => {
+            const today = new Date().toISOString().split('T')[0];
+            setFormData(prev => ({
+                ...prev,
+                date: today
+            }));
+        };
+
+        const now = new Date();
+        const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        const timeToMidnight = tomorrow.getTime() - now.getTime();
+
+        const timeoutId = setTimeout(() => {
+            updateDate();
+            // After the first midnight, update every 24 hours
+            setInterval(updateDate, 24 * 60 * 60 * 1000);
+        }, timeToMidnight);
+
+        return () => clearTimeout(timeoutId);
+    }, []);
 
     return (
         <div className="form-card">
