@@ -126,7 +126,7 @@ const Form1 = () => {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label" htmlFor="emptyField">&nbsp;</label>
+                        <label className="form-label" htmlFor="emptyField">Units</label>
                         <input
                             type="text"
                             id="emptyField"
