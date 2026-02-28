@@ -78,7 +78,6 @@ const Form1 = () => {
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            placeholder="e.g., John Doe"
                         />
                     </div>
 
@@ -92,7 +91,6 @@ const Form1 = () => {
                             value={formData.fatherName}
                             onChange={handleChange}
                             required
-                            placeholder="e.g., Richard Doe"
                         />
                     </div>
 
@@ -107,7 +105,6 @@ const Form1 = () => {
                             onChange={handleChange}
                             required
                             pattern="[0-9]{10}"
-                            placeholder="e.g., 9012345678"
                         />
                     </div>
 
@@ -125,7 +122,6 @@ const Form1 = () => {
                             value={formData.villageTown}
                             onChange={handleChange}
                             required
-                            placeholder="e.g., Hyderabad Phase 1"
                         />
                     </div>
 
@@ -139,7 +135,6 @@ const Form1 = () => {
                             value={formData.surveyNumber}
                             onChange={handleChange}
                             required
-                            placeholder="e.g., 24/A"
                         />
                     </div>
 
@@ -153,7 +148,6 @@ const Form1 = () => {
                             value={formData.extent}
                             onChange={handleChange}
                             required
-                            placeholder="e.g., 2.50"
                         />
                     </div>
 
@@ -201,7 +195,6 @@ const Form1 = () => {
                             value={formData.natureOfUse}
                             onChange={handleChange}
                             required
-                            placeholder="e.g., Cultivation, Storage"
                         />
                     </div>
 
