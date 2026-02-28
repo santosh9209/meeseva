@@ -147,7 +147,7 @@ const Form2 = () => {
                 ]
             ],
             body: [
-                ['', '', '', '', '', '', '', ''],
+                ['', '', '', '', '', '', '', data.numberOfFloors || ''],
                 ['', '', '', '', '', '', '', ''],
                 ['', '', '', '', '', '', '', '']
             ],
@@ -280,7 +280,12 @@ const Form2 = () => {
                             <td className="text-center" colSpan={2}>Stage of Construction<br /><span className="telugu-text">నిర్మాణ దశ</span></td>
                             <td className="text-center">Age of the Building in Years<br /><span className="telugu-text">కట్టడముల వయస్సు సంవత్సరములలో</span></td>
                         </tr>
-                        <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
+                        <tr style={{ height: '25px', textAlign: 'center' }}>
+                            <td></td>
+                            <td></td>
+                            <td colSpan={2}></td>
+                            <td colSpan={2}>{data.numberOfFloors || ''}</td>
+                        </tr>
                         <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
                         <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
                     </tbody>

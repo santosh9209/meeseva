@@ -15,16 +15,34 @@ const Form1 = () => {
         classification: 'Agricultural', // Default as per form layout context
         emptyField: '',
         doorNumber: '',
-        natureOfUse: '',
+        natureOfUse: 'Agriculture', // Default for Agricultural classification
+        numberOfFloors: '',
         date: new Date().toISOString().split('T')[0] // Default today's date
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        setFormData(prev => {
+            const newData = { ...prev, [name]: value };
+
+            // Handle Classification specific logic
+            if (name === 'classification') {
+                if (value === 'Agricultural') {
+                    newData.natureOfUse = 'Agriculture';
+                    newData.doorNumber = '';
+                    newData.numberOfFloors = '';
+                } else if (value === 'Residential') {
+                    newData.natureOfUse = 'Vacant Land'; // Default for residential
+                }
+            }
+
+            // Handle Nature of Use specific logic for Residential
+            if (name === 'natureOfUse' && value === 'Vacant Land') {
+                newData.numberOfFloors = '';
+            }
+
+            return newData;
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -138,18 +156,51 @@ const Form1 = () => {
                         </div>
                     )}
 
-                    <div className="form-group full-width">
-                        <label className="form-label" htmlFor="natureOfUse">Nature of Use</label>
-                        <input
-                            type="text"
-                            id="natureOfUse"
-                            name="natureOfUse"
-                            className="form-control"
-                            value={formData.natureOfUse}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+                    {formData.classification === 'Agricultural' ? (
+                        <div className="form-group full-width">
+                            <label className="form-label" htmlFor="natureOfUse">Nature of Use</label>
+                            <input
+                                type="text"
+                                id="natureOfUse"
+                                name="natureOfUse"
+                                className="form-control"
+                                value={formData.natureOfUse}
+                                readOnly
+                                style={{ backgroundColor: '#e2e8f0', cursor: 'not-allowed' }}
+                            />
+                        </div>
+                    ) : (
+                        <div className="form-group full-width">
+                            <label className="form-label" htmlFor="natureOfUse">Nature of Use</label>
+                            <select
+                                id="natureOfUse"
+                                name="natureOfUse"
+                                className="form-control"
+                                value={formData.natureOfUse}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="Vacant Land">Vacant Land</option>
+                                <option value="House/Building">House/Building</option>
+                            </select>
+                        </div>
+                    )}
+
+                    {formData.classification === 'Residential' && formData.natureOfUse === 'House/Building' && (
+                        <div className="form-group full-width">
+                            <label className="form-label" htmlFor="numberOfFloors">Number of Floors</label>
+                            <input
+                                type="number"
+                                id="numberOfFloors"
+                                name="numberOfFloors"
+                                className="form-control"
+                                value={formData.numberOfFloors}
+                                onChange={handleChange}
+                                required
+                                min="1"
+                            />
+                        </div>
+                    )}
 
                     <div className="form-group full-width">
                         <label className="form-label" htmlFor="date">Date</label>
