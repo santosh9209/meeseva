@@ -65,50 +65,6 @@ const Form1 = () => {
                 <div className="form-grid">
 
                     <div className="form-group full-width">
-                        <h3 style={{ borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: 'var(--primary)' }}>Applicant Details</h3>
-                    </div>
-
-                    <div className="form-group full-width">
-                        <label className="form-label" htmlFor="name">Full Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            className="form-control"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label className="form-label" htmlFor="fatherName">Father's Name</label>
-                        <input
-                            type="text"
-                            id="fatherName"
-                            name="fatherName"
-                            className="form-control"
-                            value={formData.fatherName}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label className="form-label" htmlFor="mobileNumber">Mobile Number</label>
-                        <input
-                            type="tel"
-                            id="mobileNumber"
-                            name="mobileNumber"
-                            className="form-control"
-                            value={formData.mobileNumber}
-                            onChange={handleChange}
-                            required
-                            pattern="[0-9]{10}"
-                        />
-                    </div>
-
-                    <div className="form-group full-width" style={{ marginTop: '1rem' }}>
                         <h3 style={{ borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: 'var(--primary)' }}>Property Details</h3>
                     </div>
 
@@ -208,6 +164,50 @@ const Form1 = () => {
                             value={formData.date}
                             onChange={handleChange}
                             required
+                        />
+                    </div>
+
+                    <div className="form-group full-width" style={{ marginTop: '1rem' }}>
+                        <h3 style={{ borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem', marginBottom: '1rem', color: 'var(--primary)' }}>Applicant Details</h3>
+                    </div>
+
+                    <div className="form-group full-width">
+                        <label className="form-label" htmlFor="name">Full Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="form-control"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label className="form-label" htmlFor="fatherName">Father's Name</label>
+                        <input
+                            type="text"
+                            id="fatherName"
+                            name="fatherName"
+                            className="form-control"
+                            value={formData.fatherName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label className="form-label" htmlFor="mobileNumber">Mobile Number</label>
+                        <input
+                            type="tel"
+                            id="mobileNumber"
+                            name="mobileNumber"
+                            className="form-control"
+                            value={formData.mobileNumber}
+                            onChange={handleChange}
+                            required
+                            pattern="[0-9]{10}"
                         />
                     </div>
 
