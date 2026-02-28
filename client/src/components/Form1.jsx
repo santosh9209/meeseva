@@ -17,6 +17,10 @@ const Form1 = () => {
         doorNumber: '',
         natureOfUse: 'Agriculture', // Default for Agricultural classification
         numberOfFloors: '',
+        floorArea1: '',
+        floorArea2: '',
+        floorArea3: '',
+        floorArea4: '',
         date: new Date().toISOString().split('T')[0] // Default today's date
     });
 
@@ -31,6 +35,10 @@ const Form1 = () => {
                     newData.natureOfUse = 'Agriculture';
                     newData.doorNumber = '';
                     newData.numberOfFloors = '';
+                    newData.floorArea1 = '';
+                    newData.floorArea2 = '';
+                    newData.floorArea3 = '';
+                    newData.floorArea4 = '';
                 } else if (value === 'Residential') {
                     newData.natureOfUse = 'Vacant Land'; // Default for residential
                 }
@@ -39,6 +47,19 @@ const Form1 = () => {
             // Handle Nature of Use specific logic for Residential
             if (name === 'natureOfUse' && value === 'Vacant Land') {
                 newData.numberOfFloors = '';
+                newData.floorArea1 = '';
+                newData.floorArea2 = '';
+                newData.floorArea3 = '';
+                newData.floorArea4 = '';
+            }
+
+            // Clean up areas if number of floors changes down
+            if (name === 'numberOfFloors') {
+                const floors = parseInt(value, 10) || 0;
+                if (floors < 4) newData.floorArea4 = '';
+                if (floors < 3) newData.floorArea3 = '';
+                if (floors < 2) newData.floorArea2 = '';
+                if (floors < 1) newData.floorArea1 = '';
             }
 
             return newData;
@@ -187,19 +208,82 @@ const Form1 = () => {
                     )}
 
                     {formData.classification === 'Residential' && formData.natureOfUse === 'House/Building' && (
-                        <div className="form-group full-width">
-                            <label className="form-label" htmlFor="numberOfFloors">Number of Floors</label>
-                            <input
-                                type="number"
-                                id="numberOfFloors"
-                                name="numberOfFloors"
-                                className="form-control"
-                                value={formData.numberOfFloors}
-                                onChange={handleChange}
-                                required
-                                min="1"
-                            />
-                        </div>
+                        <>
+                            <div className="form-group full-width">
+                                <label className="form-label" htmlFor="numberOfFloors">Number of Floors</label>
+                                <select
+                                    id="numberOfFloors"
+                                    name="numberOfFloors"
+                                    className="form-control"
+                                    value={formData.numberOfFloors}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="" disabled>Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+
+                            {parseInt(formData.numberOfFloors, 10) >= 1 && (
+                                <div className="form-group">
+                                    <label className="form-label" htmlFor="floorArea1">Floor 1 Area</label>
+                                    <input
+                                        type="number"
+                                        id="floorArea1"
+                                        name="floorArea1"
+                                        className="form-control"
+                                        value={formData.floorArea1}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            )}
+                            {parseInt(formData.numberOfFloors, 10) >= 2 && (
+                                <div className="form-group">
+                                    <label className="form-label" htmlFor="floorArea2">Floor 2 Area</label>
+                                    <input
+                                        type="number"
+                                        id="floorArea2"
+                                        name="floorArea2"
+                                        className="form-control"
+                                        value={formData.floorArea2}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            )}
+                            {parseInt(formData.numberOfFloors, 10) >= 3 && (
+                                <div className="form-group">
+                                    <label className="form-label" htmlFor="floorArea3">Floor 3 Area</label>
+                                    <input
+                                        type="number"
+                                        id="floorArea3"
+                                        name="floorArea3"
+                                        className="form-control"
+                                        value={formData.floorArea3}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            )}
+                            {parseInt(formData.numberOfFloors, 10) >= 4 && (
+                                <div className="form-group">
+                                    <label className="form-label" htmlFor="floorArea4">Floor 4 Area</label>
+                                    <input
+                                        type="number"
+                                        id="floorArea4"
+                                        name="floorArea4"
+                                        className="form-control"
+                                        value={formData.floorArea4}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            )}
+                        </>
                     )}
 
                     <div className="form-group full-width">

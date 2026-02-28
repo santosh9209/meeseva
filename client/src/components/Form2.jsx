@@ -147,9 +147,10 @@ const Form2 = () => {
                 ]
             ],
             body: [
-                ['', '', '', '', '', '', '', data.numberOfFloors || ''],
-                ['', '', '', '', '', '', '', ''],
-                ['', '', '', '', '', '', '', '']
+                ['1', '', '', data.floorArea1 || '', '', '', '', data.numberOfFloors || ''],
+                ['2', '', '', data.floorArea2 || '', '', '', '', ''],
+                ['3', '', '', data.floorArea3 || '', '', '', '', ''],
+                ['4', '', '', data.floorArea4 || '', '', '', '', '']
             ],
             margin: { left: 15, right: 15 }
         });
@@ -281,13 +282,33 @@ const Form2 = () => {
                             <td className="text-center">Age of the Building in Years<br /><span className="telugu-text">కట్టడముల వయస్సు సంవత్సరములలో</span></td>
                         </tr>
                         <tr style={{ height: '25px', textAlign: 'center' }}>
+                            <td>1</td>
                             <td></td>
-                            <td></td>
+                            <td>{data.floorArea1 || ''}</td>
                             <td colSpan={2}></td>
-                            <td colSpan={2}>{data.numberOfFloors || ''}</td>
+                            <td>{data.numberOfFloors || ''}</td>
                         </tr>
-                        <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
-                        <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
+                        <tr style={{ height: '25px', textAlign: 'center' }}>
+                            <td>2</td>
+                            <td></td>
+                            <td>{data.floorArea2 || ''}</td>
+                            <td colSpan={2}></td>
+                            <td></td>
+                        </tr>
+                        <tr style={{ height: '25px', textAlign: 'center' }}>
+                            <td>3</td>
+                            <td></td>
+                            <td>{data.floorArea3 || ''}</td>
+                            <td colSpan={2}></td>
+                            <td></td>
+                        </tr>
+                        <tr style={{ height: '25px', textAlign: 'center' }}>
+                            <td>4</td>
+                            <td></td>
+                            <td>{data.floorArea4 || ''}</td>
+                            <td colSpan={2}></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
 
