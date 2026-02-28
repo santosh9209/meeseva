@@ -156,18 +156,7 @@ const Form2 = () => {
 
         const finalY = doc.lastAutoTable.finalY + 8;
 
-        doc.setFontSize(10);
-        // Applicant Details Below Structure
-        doc.text('Applicant Name / దరఖాస్తుదారు పేరు:', 15, finalY);
-        doc.text(data.name || '', 80, finalY);
-
-        doc.text('Father\'s Name / తండ్రి పేరు:', 15, finalY + 5);
-        doc.text(data.father_name || '', 80, finalY + 5);
-
-        doc.text('Mobile Number / మొబైల్ నెంబర్:', 15, finalY + 10);
-        doc.text(data.mobile_number || '', 80, finalY + 10);
-
-        const afterAppY = finalY + 18;
+        const afterAppY = finalY + 10;
 
         // Footer lines
         doc.setLineWidth(0.5);
@@ -181,9 +170,12 @@ const Form2 = () => {
         }
 
         doc.text(`Date / తేది. : ${formattedDate}`, 15, afterAppY + 5);
-        doc.text('Signature', 130, afterAppY + 5);
+        doc.text('Signature', 140, afterAppY + 5);
 
-        // Removed duplicate Date text
+        // Applicant Details Below Signature (Right Side)
+        doc.text(`${data.name || ''}`, 130, afterAppY + 12);
+        doc.text(`S/o, D/o: ${data.father_name || ''}`, 130, afterAppY + 18);
+        doc.text(`Ph: ${data.mobile_number || ''}`, 130, afterAppY + 24);
 
         // Bottom left summary
         doc.text('Village', 15, afterAppY + 15);
@@ -210,23 +202,6 @@ const Form2 = () => {
 
     return (
         <div className="requisition-wrapper">
-            <div className="actions-bar">
-                <button className="btn btn-secondary" onClick={() => navigate('/')}>
-                    ← Back to Form
-                </button>
-                <button className="btn btn-secondary" onClick={handlePrint}>
-                    <svg style={{ width: '18px', marginRight: '6px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2-2v4h10z" />
-                    </svg>
-                    Print Form
-                </button>
-                <button className="btn btn-primary" onClick={handleDownloadPDF}>
-                    <svg style={{ width: '18px', marginRight: '6px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    Download PDF
-                </button>
-            </div>
 
             <div className="printable-area">
                 <div className="card-header-main">
@@ -311,36 +286,21 @@ const Form2 = () => {
                     </tbody>
                 </table>
 
-                {/* Applicant Details Below Structure */}
-                <div style={{ marginTop: '15px' }}>
-                    <table style={{ width: '60%', borderCollapse: 'collapse', fontSize: '0.9rem', fontWeight: 'bold' }}>
-                        <tbody>
-                            <tr>
-                                <td style={{ padding: '4px 0', width: '250px' }}>Applicant Name / <span className="telugu-text" style={{ fontWeight: 'normal' }}>దరఖాస్తుదారు పేరు</span></td>
-                                <td>: {data.name}</td>
-                            </tr>
-                            <tr>
-                                <td style={{ padding: '4px 0' }}>Father's Name / <span className="telugu-text" style={{ fontWeight: 'normal' }}>తండ్రి పేరు</span></td>
-                                <td>: {data.father_name}</td>
-                            </tr>
-                            <tr>
-                                <td style={{ padding: '4px 0' }}>Mobile Number / <span className="telugu-text" style={{ fontWeight: 'normal' }}>మొబైల్ నెంబర్</span></td>
-                                <td>: {data.mobile_number}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
                 <div className="card-signature-area mt-4">
                     <div className="left-sig">
                         Date / <span className="telugu-text">తేది.</span> : {formattedDate}
                     </div>
-                    <div className="right-sig">
-                        Signature
+                    <div className="right-sig" style={{ textAlign: 'center', width: '250px' }}>
+                        Signature<br /><br />
+                        <div style={{ textAlign: 'left', marginTop: '10px' }}>
+                            {data.name}<br />
+                            S/o, D/o: {data.father_name}<br />
+                            Ph: {data.mobile_number}
+                        </div>
                     </div>
                 </div>
 
-                <div className="card-summary-bottom">
+                <div className="card-summary-bottom" style={{ marginTop: '-70px' }}>
                     <table className="summary-print-table">
                         <tbody>
                             <tr>
@@ -362,6 +322,24 @@ const Form2 = () => {
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            <div className="actions-bar" style={{ marginTop: '20px', borderTop: '1px solid #ccc', paddingTop: '20px' }}>
+                <button className="btn btn-secondary" onClick={() => navigate('/')}>
+                    ← Back to Form
+                </button>
+                <button className="btn btn-secondary" onClick={handlePrint}>
+                    <svg style={{ width: '18px', marginRight: '6px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2-2v4h10z" />
+                    </svg>
+                    Print Form
+                </button>
+                <button className="btn btn-primary" onClick={handleDownloadPDF}>
+                    <svg style={{ width: '18px', marginRight: '6px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download PDF
+                </button>
             </div>
         </div>
     );
