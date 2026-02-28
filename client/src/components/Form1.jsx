@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const Form1 = () => {
     const navigate = useNavigate();
@@ -33,14 +32,17 @@ const Form1 = () => {
         setError(null);
 
         try {
-            const response = await axios.post('/api/requisitions', formData);
-            if (response.data.success) {
-                // Redirect to printable layout Form 2
-                navigate(`/printable/${response.data.id}`);
-            }
+            // Generate a unique ID
+            const id = Date.now().toString();
+            // Save to localStorage
+            const dataToSave = { ...formData, id };
+            localStorage.setItem(`requisition_${id}`, JSON.stringify(dataToSave));
+
+            // Redirect to printable layout Form 2
+            navigate(`/printable/${id}`);
         } catch (err) {
-            console.error('Error submitting form:', err);
-            setError('Failed to submit the application. Please ensure the backend is running.');
+            console.error('Error saving form:', err);
+            setError('Failed to save the application locally.');
         } finally {
             setLoading(false);
         }

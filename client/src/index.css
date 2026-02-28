@@ -312,6 +312,12 @@ select.form-control {
 @media print {
   body {
     background: white;
+    font-size: 11pt;
+    /* Smaller font for printing */
+  }
+
+  .app-container {
+    min-height: auto;
   }
 
   .app-container,
@@ -319,6 +325,11 @@ select.form-control {
     padding: 0;
     margin: 0;
     max-width: none;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm;
   }
 
   .actions-bar {
@@ -365,7 +376,7 @@ select.form-control {
 
 .card-title-huge {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 900;
   letter-spacing: -1px;
   line-height: 1;
@@ -479,7 +490,7 @@ select.form-control {
 }
 
 .mt-4 {
-  margin-top: 20px !important;
+  margin-top: 10px !important;
 }
 
 .card-complex-table {

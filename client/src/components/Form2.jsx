@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
@@ -12,15 +11,27 @@ const Form2 = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchRequisition = async () => {
+        const fetchRequisition = () => {
             try {
-                const response = await axios.get(`/api/requisitions/${id}`);
-                if (response.data.success) {
-                    setData(response.data.data);
+                const storedData = localStorage.getItem(`requisition_${id}`);
+                if (storedData) {
+                    const parsedData = JSON.parse(storedData);
+                    // Map camelCase to snake_case for compatibility with existing code
+                    const mappedData = {
+                        ...parsedData,
+                        village_town: parsedData.villageTown,
+                        survey_number: parsedData.surveyNumber,
+                        nature_of_use: parsedData.natureOfUse,
+                        father_name: parsedData.fatherName,
+                        mobile_number: parsedData.mobileNumber
+                    };
+                    setData(mappedData);
+                } else {
+                    setError('Requisition data not found in local storage.');
                 }
             } catch (err) {
-                console.error('Error fetching data:', err);
-                setError('Failed to load requisition data. Ensure the backend is running.');
+                console.error('Error reading data:', err);
+                setError('Failed to read requisition data from local storage.');
             } finally {
                 setLoading(false);
             }
@@ -51,38 +62,38 @@ const Form2 = () => {
 
         // Header Area
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(36);
-        centerText('CARD', 20, 36, true);
-        centerText('(Computer - aided Administration of Registration Department)', 26, 8, false);
-        centerText('Visit us at : http://registration.telangana.gov.in', 31, 9, true);
+        doc.setFontSize(28); // Reduced from 36
+        centerText('CARD', 15, 28, true);
+        centerText('(Computer - aided Administration of Registration Department)', 20, 8, false);
+        centerText('Visit us at : http://registration.telangana.gov.in', 25, 9, true);
 
-        centerText('REQUISITION FORM / అభ్యర్ధన దరఖాస్తు', 40, 14, true);
-        centerText('(for Assistance on Market Value/Chargeability) / (మార్కెట్ విలువ/డ్యూటీ చెల్లింపు సహాయము కొరకు)', 46, 11, true);
-        centerText('Nature of Transaction / దస్తావేజు స్వభావము', 52, 12, true);
+        centerText('REQUISITION FORM / అభ్యర్ధన దరఖాస్తు', 32, 12, true);
+        centerText('(for Assistance on Market Value/Chargeability) / (మార్కెట్ విలువ/డ్యూటీ చెల్లింపు సహాయము కొరకు)', 37, 10, true);
+        centerText('Nature of Transaction / దస్తావేజు స్వభావము', 42, 11, true);
 
         // Transaction Code row
         doc.setFontSize(10);
         doc.setFont('helvetica', 'normal');
-        doc.text('Transaction Code', 20, 60);
-        doc.text('దస్తావేజు కోడ్ నెం.', 20, 64);
+        doc.text('Transaction Code', 20, 48);
+        doc.text('దస్తావేజు కోడ్ నెం.', 20, 52);
 
         // Boxes for code
         doc.setLineWidth(0.5);
-        doc.rect(50, 56, 20, 8);
-        doc.text('01', 58, 62);
-        doc.rect(80, 56, 20, 8);
-        doc.text('01', 88, 62);
+        doc.rect(50, 45, 20, 7);
+        doc.text('01', 58, 50);
+        doc.rect(80, 45, 20, 7);
+        doc.text('01', 88, 50);
 
-        doc.text('Name of the Transaction\nదస్తావేజు పేరు', 105, 59);
-        doc.rect(140, 56, 50, 8);
-        doc.text('Sale Deed', 152, 62);
+        doc.text('Name of the Transaction\nదస్తావేజు పేరు', 105, 48);
+        doc.rect(140, 45, 50, 7);
+        doc.text('Sale Deed', 152, 50);
 
         // DETAILS OF PROPERTY (AGRICULTURAL) section
-        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', 75, 12, true);
+        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', 60, 11, true);
 
         // Agricultural Table
         doc.autoTable({
-            startY: 80,
+            startY: 65,
             theme: 'plain',
             styles: {
                 font: 'helvetica',
@@ -115,9 +126,9 @@ const Form2 = () => {
         });
 
         // Dummy Structure Table (empty like screenshot)
-        centerText('DETAILS OF STRUCTURE / కట్టడముల వివరములు', doc.lastAutoTable.finalY + 10, 12, true);
+        centerText('DETAILS OF STRUCTURE / కట్టడముల వివరములు', doc.lastAutoTable.finalY + 8, 11, true);
         doc.autoTable({
-            startY: doc.lastAutoTable.finalY + 15,
+            startY: doc.lastAutoTable.finalY + 12,
             theme: 'plain',
             styles: { font: 'helvetica', fontSize: 8, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.5, halign: 'center' },
             head: [
@@ -143,30 +154,24 @@ const Form2 = () => {
             margin: { left: 15, right: 15 }
         });
 
-        const finalY = doc.lastAutoTable.finalY + 10;
+        const finalY = doc.lastAutoTable.finalY + 8;
 
         doc.setFontSize(10);
         // Applicant Details Below Structure
         doc.text('Applicant Name / దరఖాస్తుదారు పేరు:', 15, finalY);
         doc.text(data.name || '', 80, finalY);
 
-        doc.text('Father\'s Name / తండ్రి పేరు:', 15, finalY + 6);
-        doc.text(data.father_name || '', 80, finalY + 6);
+        doc.text('Father\'s Name / తండ్రి పేరు:', 15, finalY + 5);
+        doc.text(data.father_name || '', 80, finalY + 5);
 
-        doc.text('Mobile Number / మొబైల్ నెంబర్:', 15, finalY + 12);
-        doc.text(data.mobile_number || '', 80, finalY + 12);
+        doc.text('Mobile Number / మొబైల్ నెంబర్:', 15, finalY + 10);
+        doc.text(data.mobile_number || '', 80, finalY + 10);
 
-        const afterAppY = finalY + 25;
+        const afterAppY = finalY + 18;
 
         // Footer lines
         doc.setLineWidth(0.5);
         doc.line(15, afterAppY, pageWidth - 15, afterAppY);
-
-        doc.text('Date / తేది.', 15, afterAppY + 5);
-        doc.text('Signature', 130, afterAppY + 5);
-        doc.text('Name', 130, afterAppY + 12);
-        doc.text('Address', 130, afterAppY + 19);
-
 
         // Format Date safely
         let formattedDate = '';
@@ -175,20 +180,23 @@ const Form2 = () => {
             formattedDate = dateObj.toLocaleDateString('en-GB'); // DD/MM/YYYY
         }
 
-        doc.text(`Date : ${formattedDate}`, 15, afterAppY + 15);
+        doc.text(`Date / తేది. : ${formattedDate}`, 15, afterAppY + 5);
+        doc.text('Signature', 130, afterAppY + 5);
+
+        // Removed duplicate Date text
 
         // Bottom left summary
-        doc.text('Village', 15, afterAppY + 30);
-        doc.text(`:   ${data.village_town}`, 40, afterAppY + 30);
+        doc.text('Village', 15, afterAppY + 15);
+        doc.text(`:   ${data.village_town}`, 40, afterAppY + 15);
 
-        doc.text('Sy.No.', 15, afterAppY + 36);
-        doc.text(`:   ${data.survey_number}`, 40, afterAppY + 36);
+        doc.text('Sy.No.', 15, afterAppY + 21);
+        doc.text(`:   ${data.survey_number}`, 40, afterAppY + 21);
 
-        doc.text('Extent', 15, afterAppY + 42);
-        doc.text(`:   ${data.extent}`, 40, afterAppY + 42);
+        doc.text('Extent', 15, afterAppY + 27);
+        doc.text(`:   ${data.extent}`, 40, afterAppY + 27);
 
-        doc.text('Classification', 15, afterAppY + 48);
-        doc.text(`:   ${data.classification}`, 40, afterAppY + 48);
+        doc.text('Classification', 15, afterAppY + 33);
+        doc.text(`:   ${data.classification}`, 40, afterAppY + 33);
 
         doc.save(`CARD_Requisition_${data.id}.pdf`);
     };
@@ -325,7 +333,7 @@ const Form2 = () => {
 
                 <div className="card-signature-area mt-4">
                     <div className="left-sig">
-                        Date / <span className="telugu-text">తేది.</span>
+                        Date / <span className="telugu-text">తేది.</span> : {formattedDate}
                     </div>
                     <div className="right-sig">
                         Signature
@@ -336,12 +344,7 @@ const Form2 = () => {
                     <table className="summary-print-table">
                         <tbody>
                             <tr>
-                                <td style={{ width: '120px' }}>Date</td>
-                                <td>: {formattedDate}</td>
-                            </tr>
-                            <tr><td colSpan={2} style={{ height: '20px' }}></td></tr>
-                            <tr>
-                                <td>Village</td>
+                                <td style={{ width: '120px' }}>Village</td>
                                 <td>: {data.village_town}</td>
                             </tr>
                             <tr>
@@ -358,11 +361,6 @@ const Form2 = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <div className="right-address">
-                        <p>Name</p>
-                        <br />
-                        <p>Address</p>
-                    </div>
                 </div>
             </div>
         </div>
