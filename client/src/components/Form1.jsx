@@ -51,7 +51,7 @@ const Form1 = () => {
     return (
         <div className="form-card">
             <div className="form-header">
-                <h2>Property Details Form</h2>
+                <h2>Market Value Application Form</h2>
                 <p>Please enter the details of the agricultural property.</p>
             </div>
 
