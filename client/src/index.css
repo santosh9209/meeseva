@@ -360,8 +360,8 @@ select.form-control {
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 0.5rem;
-  /* Drastically reduced gaps to stick columns together */
+  gap: 0.2rem 0.2rem;
+  /* Columns squeezed together strictly */
 }
 
 .full-width {

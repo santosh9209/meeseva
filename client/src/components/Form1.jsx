@@ -124,22 +124,7 @@ const Form1 = () => {
                         </select>
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label" htmlFor="units">Units</label>
-                        <select
-                            id="units"
-                            name="units"
-                            className="form-control"
-                            value={formData.units}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="Acres">Acres</option>
-                            <option value="Hectares">Hectares</option>
-                            <option value="Sq. Yards">Sq. Yards</option>
-                            <option value="Cents">Cents</option>
-                        </select>
-                    </div>
+
 
                     <div className="form-group full-width">
                         <label className="form-label" htmlFor="natureOfUse">Nature of Use</label>
