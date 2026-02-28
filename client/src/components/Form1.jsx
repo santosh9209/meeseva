@@ -5,6 +5,15 @@ const Form1 = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    // Helper function to get local date in YYYY-MM-DD
+    const getLocalDateString = () => {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     const [formData, setFormData] = useState({
         name: '',
         fatherName: '',
@@ -16,7 +25,7 @@ const Form1 = () => {
         emptyField: '',
         doorNumber: '',
         natureOfUse: 'Agriculture', // Default for Agricultural classification
-        date: new Date().toISOString().split('T')[0] // Default today's date
+        date: getLocalDateString() // Default local today's date
     });
 
     const handleChange = (e) => {
@@ -63,7 +72,7 @@ const Form1 = () => {
     // Auto update date at midnight
     useEffect(() => {
         const updateDate = () => {
-            const today = new Date().toISOString().split('T')[0];
+            const today = getLocalDateString();
             setFormData(prev => ({
                 ...prev,
                 date: today
