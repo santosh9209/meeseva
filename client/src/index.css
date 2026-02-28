@@ -360,7 +360,7 @@ select.form-control {
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.2rem 0.2rem;
+  gap: 0.2rem 0.05rem;
   /* Columns squeezed together strictly */
 }
 
