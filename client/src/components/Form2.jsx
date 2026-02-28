@@ -116,8 +116,8 @@ const Form2 = () => {
                     { content: '' } // blank for now
                 ],
                 [
-                    { content: 'Units\nయూనిట్స్' },
-                    { content: data.units || '' },
+                    { content: 'Extent\nవిస్తీర్ణము' },
+                    { content: data.extent || '' },
                     { content: 'Nature of use\nఏ ఉపయోగమునకు వర్తించు' },
                     { content: data.nature_of_use || '', colSpan: 3 }
                 ]
@@ -251,8 +251,8 @@ const Form2 = () => {
                             <td className="val-cell no-bottom-border top-border">{data.classification}</td>
                         </tr>
                         <tr>
-                            <td className="th-like">Units<br /><span className="telugu-text">యూనిట్స్</span></td>
-                            <td className="val-cell">{data.units}</td>
+                            <td className="th-like">Extent<br /><span className="telugu-text">విస్తీర్ణము</span></td>
+                            <td className="val-cell">{data.extent}</td>
                             <td className="th-like">Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
                             <td className="val-cell">{data.nature_of_use}</td>
                             <td className="th-like top-border">Habitation Name<br /><span className="telugu-text">నివాస స్థలము</span></td>
