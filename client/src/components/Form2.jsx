@@ -90,7 +90,7 @@ const Form2 = () => {
         doc.text('Sale Deed', 152, 50);
 
         // DETAILS OF PROPERTY (AGRICULTURAL) section
-        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', 60, 14, true);
+        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', 60, 18, true);
 
         // Agricultural Table
         doc.autoTable({
@@ -98,7 +98,7 @@ const Form2 = () => {
             theme: 'plain',
             styles: {
                 font: 'helvetica',
-                fontSize: 14,
+                fontSize: 18,
                 textColor: [0, 0, 0],
                 lineColor: [0, 0, 0],
                 lineWidth: 0.5,
@@ -241,23 +241,23 @@ const Form2 = () => {
                     DETAILS OF PROPERTY (AGRICULTURAL) / <span className="telugu-text">ఆస్తి వివరములు (వ్యవసాయ భూమి)</span>
                 </div>
 
-                <table className="card-complex-table" style={{ fontSize: '14px' }}>
-                    <tbody style={{ fontSize: '14px' }}>
+                <table className="card-complex-table" style={{ fontSize: '18px' }}>
+                    <tbody style={{ fontSize: '18px' }}>
                         <tr>
-                            <td className="th-like top-border" style={{ fontSize: '14px' }}>Village / Town Name<br /><span className="telugu-text">గ్రామము/పట్టణము పేరు</span></td>
-                            <td className="val-cell top-border" style={{ fontSize: '14px' }}>{data.village_town}</td>
-                            <td className="th-like top-border" style={{ fontSize: '14px' }}>Sy. No.<br /><span className="telugu-text">సర్వే నెం.</span></td>
-                            <td className="val-cell top-border" style={{ fontSize: '14px' }}>{data.survey_number}</td>
-                            <td className="th-like no-bottom-border top-border" style={{ fontSize: '14px' }}>Classification<br /><span className="telugu-text">వర్గీకరణ</span></td>
-                            <td className="val-cell no-bottom-border top-border" style={{ fontSize: '14px' }}>{data.classification}</td>
+                            <td className="th-like top-border" style={{ fontSize: '18px' }}>Village / Town Name<br /><span className="telugu-text">గ్రామము/పట్టణము పేరు</span></td>
+                            <td className="val-cell top-border" style={{ fontSize: '18px' }}>{data.village_town}</td>
+                            <td className="th-like top-border" style={{ fontSize: '18px' }}>Sy. No.<br /><span className="telugu-text">సర్వే నెం.</span></td>
+                            <td className="val-cell top-border" style={{ fontSize: '18px' }}>{data.survey_number}</td>
+                            <td className="th-like no-bottom-border top-border" style={{ fontSize: '18px' }}>Classification<br /><span className="telugu-text">వర్గీకరణ</span></td>
+                            <td className="val-cell no-bottom-border top-border" style={{ fontSize: '18px' }}>{data.classification}</td>
                         </tr>
                         <tr>
-                            <td className="th-like" style={{ fontSize: '14px' }}>Extent<br /><span className="telugu-text">విస్తీర్ణము</span></td>
-                            <td className="val-cell" style={{ fontSize: '14px' }}>{data.extent}</td>
-                            <td className="th-like" style={{ fontSize: '14px' }}>Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
-                            <td className="val-cell" style={{ fontSize: '14px' }}>{data.nature_of_use}</td>
-                            <td className="th-like top-border" style={{ fontSize: '14px' }}>Door No. / Habitation Name<br /><span className="telugu-text">ఇంటి నంబరు / నివాస స్థలము</span></td>
-                            <td className="val-cell top-border" style={{ fontSize: '14px' }}>{data.doorNumber || ''}</td>
+                            <td className="th-like" style={{ fontSize: '18px' }}>Extent<br /><span className="telugu-text">విస్తీర్ణము</span></td>
+                            <td className="val-cell" style={{ fontSize: '18px' }}>{data.extent}</td>
+                            <td className="th-like" style={{ fontSize: '18px' }}>Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
+                            <td className="val-cell" style={{ fontSize: '18px' }}>{data.nature_of_use}</td>
+                            <td className="th-like top-border" style={{ fontSize: '18px' }}>Door No. / Habitation Name<br /><span className="telugu-text">ఇంటి నంబరు / నివాస స్థలము</span></td>
+                            <td className="val-cell top-border" style={{ fontSize: '18px' }}>{data.doorNumber || ''}</td>
                         </tr>
                     </tbody>
                 </table>
