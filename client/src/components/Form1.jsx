@@ -243,7 +243,7 @@ const Form1 = () => {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label" htmlFor="fatherName">Father's Name</label>
+                        <label className="form-label" htmlFor="fatherName">S/o, W/o, D/o</label>
                         <input
                             type="text"
                             id="fatherName"
