@@ -22,6 +22,7 @@ const Form2 = () => {
                         village_town: parsedData.villageTown,
                         survey_number: parsedData.surveyNumber,
                         nature_of_use: parsedData.natureOfUse,
+                        relation_type: parsedData.relationType || 'S/o', // Fallback for backwards compatibility
                         father_name: parsedData.fatherName,
                         mobile_number: parsedData.mobileNumber
                     };
@@ -89,7 +90,7 @@ const Form2 = () => {
         doc.text('Sale Deed', 152, 50);
 
         // DETAILS OF PROPERTY (AGRICULTURAL) section
-        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', 60, 11, true);
+        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', 60, 14, true);
 
         // Agricultural Table
         doc.autoTable({
@@ -97,7 +98,7 @@ const Form2 = () => {
             theme: 'plain',
             styles: {
                 font: 'helvetica',
-                fontSize: 10,
+                fontSize: 14,
                 textColor: [0, 0, 0],
                 lineColor: [0, 0, 0],
                 lineWidth: 0.5,
@@ -174,7 +175,7 @@ const Form2 = () => {
 
         // Applicant Details Below Signature (Right Side)
         doc.text(`${data.name || ''}`, 130, afterAppY + 12);
-        doc.text(`S/o, D/o: ${data.father_name || ''}`, 130, afterAppY + 18);
+        doc.text(`${data.relation_type}: ${data.father_name || ''}`, 130, afterAppY + 18);
         doc.text(`Ph: ${data.mobile_number || ''}`, 130, afterAppY + 24);
 
         // Bottom left summary
@@ -240,23 +241,23 @@ const Form2 = () => {
                     DETAILS OF PROPERTY (AGRICULTURAL) / <span className="telugu-text">ఆస్తి వివరములు (వ్యవసాయ భూమి)</span>
                 </div>
 
-                <table className="card-complex-table">
-                    <tbody>
+                <table className="card-complex-table" style={{ fontSize: '14px' }}>
+                    <tbody style={{ fontSize: '14px' }}>
                         <tr>
-                            <td className="th-like top-border">Village / Town Name<br /><span className="telugu-text">గ్రామము/పట్టణము పేరు</span></td>
-                            <td className="val-cell top-border">{data.village_town}</td>
-                            <td className="th-like top-border">Sy. No.<br /><span className="telugu-text">సర్వే నెం.</span></td>
-                            <td className="val-cell top-border">{data.survey_number}</td>
-                            <td className="th-like no-bottom-border top-border">Classification<br /><span className="telugu-text">వర్గీకరణ</span></td>
-                            <td className="val-cell no-bottom-border top-border">{data.classification}</td>
+                            <td className="th-like top-border" style={{ fontSize: '14px' }}>Village / Town Name<br /><span className="telugu-text">గ్రామము/పట్టణము పేరు</span></td>
+                            <td className="val-cell top-border" style={{ fontSize: '14px' }}>{data.village_town}</td>
+                            <td className="th-like top-border" style={{ fontSize: '14px' }}>Sy. No.<br /><span className="telugu-text">సర్వే నెం.</span></td>
+                            <td className="val-cell top-border" style={{ fontSize: '14px' }}>{data.survey_number}</td>
+                            <td className="th-like no-bottom-border top-border" style={{ fontSize: '14px' }}>Classification<br /><span className="telugu-text">వర్గీకరణ</span></td>
+                            <td className="val-cell no-bottom-border top-border" style={{ fontSize: '14px' }}>{data.classification}</td>
                         </tr>
                         <tr>
-                            <td className="th-like">Extent<br /><span className="telugu-text">విస్తీర్ణము</span></td>
-                            <td className="val-cell">{data.extent}</td>
-                            <td className="th-like">Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
-                            <td className="val-cell">{data.nature_of_use}</td>
-                            <td className="th-like top-border">Door No. / Habitation Name<br /><span className="telugu-text">ఇంటి నంబరు / నివాస స్థలము</span></td>
-                            <td className="val-cell top-border">{data.doorNumber || ''}</td>
+                            <td className="th-like" style={{ fontSize: '14px' }}>Extent<br /><span className="telugu-text">విస్తీర్ణము</span></td>
+                            <td className="val-cell" style={{ fontSize: '14px' }}>{data.extent}</td>
+                            <td className="th-like" style={{ fontSize: '14px' }}>Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
+                            <td className="val-cell" style={{ fontSize: '14px' }}>{data.nature_of_use}</td>
+                            <td className="th-like top-border" style={{ fontSize: '14px' }}>Door No. / Habitation Name<br /><span className="telugu-text">ఇంటి నంబరు / నివాస స్థలము</span></td>
+                            <td className="val-cell top-border" style={{ fontSize: '14px' }}>{data.doorNumber || ''}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -294,7 +295,7 @@ const Form2 = () => {
                         Signature<br /><br />
                         <div style={{ textAlign: 'left', marginTop: '10px' }}>
                             {data.name}<br />
-                            S/o, D/o: {data.father_name}<br />
+                            {data.relation_type}: {data.father_name}<br />
                             Ph: {data.mobile_number}
                         </div>
                     </div>

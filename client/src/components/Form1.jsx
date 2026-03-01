@@ -16,6 +16,7 @@ const Form1 = () => {
 
     const [formData, setFormData] = useState({
         name: '',
+        relationType: 'S/o',
         fatherName: '',
         mobileNumber: '',
         villageTown: '',
@@ -242,17 +243,34 @@ const Form1 = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label" htmlFor="fatherName">S/o, W/o, D/o</label>
-                        <input
-                            type="text"
-                            id="fatherName"
-                            name="fatherName"
-                            className="form-control"
-                            value={formData.fatherName}
-                            onChange={handleChange}
-                            required
-                        />
+                    <div className="form-group full-width" style={{ display: 'flex', gap: '1rem' }}>
+                        <div style={{ flex: '1' }}>
+                            <label className="form-label" htmlFor="relationType">Relation Type</label>
+                            <select
+                                id="relationType"
+                                name="relationType"
+                                className="form-control"
+                                value={formData.relationType}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="S/o">S/o</option>
+                                <option value="D/o">D/o</option>
+                                <option value="W/o">W/o</option>
+                            </select>
+                        </div>
+                        <div style={{ flex: '2' }}>
+                            <label className="form-label" htmlFor="fatherName">Relation Name</label>
+                            <input
+                                type="text"
+                                id="fatherName"
+                                name="fatherName"
+                                className="form-control"
+                                value={formData.fatherName}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
 
                     <div className="form-group">
