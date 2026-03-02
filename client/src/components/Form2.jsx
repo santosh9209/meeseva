@@ -89,75 +89,118 @@ const Form2 = () => {
         doc.rect(140, 45, 50, 7);
         doc.text('Sale Deed', 152, 50);
 
-        // DETAILS OF PROPERTY (AGRICULTURAL) section
-        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', 60, 18, true);
+        // DETAILS OF PROPERTY (URBAN)
+        centerText('DETAILS OF PROPERTY (URBAN) / ఆస్తి వివరములు (గృహ సంబంధమైన)', 60, 14, true);
 
-        // Agricultural Table
+        // Urban Table
         doc.autoTable({
             startY: 65,
             theme: 'plain',
             styles: {
                 font: 'helvetica',
-                fontSize: 18,
+                fontSize: 10,
                 textColor: [0, 0, 0],
                 lineColor: [0, 0, 0],
                 lineWidth: 0.5,
+                cellPadding: 1,
             },
             body: [
                 [
-                    { content: 'Village / Town Name\nగ్రామము/పట్టణము పేరు', rowSpan: 2 },
-                    { content: data.village_town || '', rowSpan: 2 },
-                    { content: 'Sy. No.\nసర్వే నెం.', rowSpan: 2 },
-                    { content: data.survey_number || '', rowSpan: 2 },
-                    { content: 'Classification\nవర్గీకరణ' },
-                    { content: data.classification || '' }
+                    { content: 'Village / Town Name\nగ్రామము/పట్టణము పేరు' },
+                    { content: data.village_town || '' },
+                    { content: 'Ward No.\nవార్డు నెం.' },
+                    { content: '' },
+                    { content: 'Block No.\nబ్లాక్ నెం.' },
+                    { content: '' },
+                    { content: 'Locality\nప్రాంతము\nHabitation Name/నివాస స్థలము' },
+                    { content: '' }
                 ],
                 [
-                    { content: 'Door No. / Habitation Name\nఇంటి నంబరు / నివాస స్థలము' },
-                    { content: data.doorNumber || '' }
-                ],
-                [
-                    { content: 'Extent\nవిస్తీర్ణము' },
+                    { content: 'Door No.\nఇంటి నం.' },
+                    { content: data.doorNumber || '' },
+                    { content: 'Extent\nSq.yds.\nవైశాల్యం చ.గ.' },
                     { content: data.extent || '' },
-                    { content: 'Nature of use\nఏ ఉపయోగమునకు వర్తించు' },
-                    { content: data.nature_of_use || '', colSpan: 3 }
+                    { content: 'Plinth area\nSft./కట్టడపు\nవైశాల్యము (చ.అ.)' },
+                    { content: '' },
+                    { content: 'Nature of Use\nRes./Comm.\nఏ ఉపయోగమునకు వర్తించు' },
+                    { content: data.nature_of_use || '' }
                 ]
             ],
             margin: { left: 15, right: 15 }
         });
 
-        // Dummy Structure Table (empty like screenshot)
-        centerText('DETAILS OF STRUCTURE / కట్టడముల వివరములు', doc.lastAutoTable.finalY + 8, 11, true);
+        // DETAILS OF PROPERTY (AGRICULTURAL) section
+        centerText('DETAILS OF PROPERTY (AGRICULTURAL) / ఆస్తి వివరములు (వ్యవసాయ భూమి)', doc.lastAutoTable.finalY + 8, 14, true);
+
+        // Agricultural Table
         doc.autoTable({
             startY: doc.lastAutoTable.finalY + 12,
             theme: 'plain',
-            styles: { font: 'helvetica', fontSize: 8, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.5, halign: 'center' },
+            styles: {
+                font: 'helvetica',
+                fontSize: 10,
+                textColor: [0, 0, 0],
+                lineColor: [0, 0, 0],
+                lineWidth: 0.5,
+                cellPadding: 1,
+            },
+            body: [
+                [
+                    { content: 'Village / Town Name\nగ్రామము/పట్టణము పేరు' },
+                    { content: data.village_town || '' },
+                    { content: 'Sy. No.\nసర్వే నెం.' },
+                    { content: data.survey_number || '' },
+                    { content: 'Classification\nవర్గీకరణ' },
+                    { content: data.classification || '' }
+                ],
+                [
+                    { content: 'Units\nయూనిట్స్' },
+                    { content: '' },
+                    { content: 'Nature of use\nఏ ఉపయోగమునకు వర్తించు' },
+                    { content: data.nature_of_use || '' },
+                    { content: 'Habitation Name\nనివాస స్థలము' },
+                    { content: data.doorNumber || '' }
+                ]
+            ],
+            margin: { left: 15, right: 15 }
+        });
+
+        // Structure Table
+        centerText('DETAILS OF STRUCTURE / కట్టడముల వివరములు', doc.lastAutoTable.finalY + 8, 14, true);
+        doc.autoTable({
+            startY: doc.lastAutoTable.finalY + 12,
+            theme: 'plain',
+            styles: { font: 'helvetica', fontSize: 10, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.5, halign: 'center', cellPadding: 1 },
             head: [
                 [
-                    { content: 'Flat (y/n)\nఫ్లాట్ (అ/కా)', colSpan: 1 },
-                    { content: 'Name of Apartment\nఅపార్ట్మెంట్ పేరు', colSpan: 2 },
-                    { content: 'Flat No.\nఫ్లాట్ నెం.', colSpan: 2 },
-                    { content: 'Total No. of Floors\nమొత్తం అంతస్తులు', colSpan: 2 }
-                ],
+                    { content: 'Flat (y/n)\nఫ్లాట్ (అ/కా)' },
+                    { content: '' },
+                    { content: 'Name of Apartment\nఅపార్ట్మెంట్ పేరు' },
+                    { content: '' },
+                    { content: 'Flat No.\nఫ్లాట్ నెం.' },
+                    { content: '' },
+                    { content: 'Total No. of Floors\nమొత్తం అంతస్తులు' },
+                    { content: '' }
+                ]
+            ],
+            body: [
                 [
                     { content: 'Floor No.\nఅంతస్తు నెం.', colSpan: 1 },
                     { content: 'Type of Structure\nకట్టడముల స్వభావము', colSpan: 2 },
                     { content: 'Plinth Area in Sft./\nకట్టడపు వైశాల్యము(చ.అ.)', colSpan: 2 },
                     { content: 'Stage of Construction\nనిర్మాణ దశ', colSpan: 2 },
-                    { content: 'Age of the Building in Years\nకట్టడముల వయస్సు సంవత్సరములలో', colSpan: 2 }
-                ]
-            ],
-            body: [
-                ['', '', '', '', '', '', '', ''],
-                ['', '', '', '', '', '', '', ''],
-                ['', '', '', '', '', '', '', '']
+                    { content: 'Age of the Building in Years\nకట్టడముల వయస్సు సంవత్సరములలో', colSpan: 1 }
+                ],
+                [{ content: '', colSpan: 1 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 1 }],
+                [{ content: '', colSpan: 1 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 1 }],
+                [{ content: '', colSpan: 1 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 1 }],
+                [{ content: '', colSpan: 1 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 2 }, { content: '', colSpan: 1 }]
             ],
             margin: { left: 15, right: 15 }
         });
 
         const finalY = doc.lastAutoTable.finalY + 8;
-
-        const afterAppY = finalY + 10;
+        const afterAppY = finalY;
 
         // Footer lines
         doc.setLineWidth(0.5);
@@ -170,26 +213,29 @@ const Form2 = () => {
             formattedDate = dateObj.toLocaleDateString('en-GB'); // DD/MM/YYYY
         }
 
-        doc.text(`Date / తేది. : ${formattedDate}`, 15, afterAppY + 5);
-        doc.text('Signature', 140, afterAppY + 5);
+        doc.text(`Date / తేది.`, 15, afterAppY + 5);
+        doc.text(`Date : ${formattedDate}`, 15, afterAppY + 12);
 
-        // Applicant Details Below Signature (Right Side)
-        doc.text(`${data.name || ''}`, 130, afterAppY + 12);
-        doc.text(`${data.relation_type}: ${data.father_name || ''}`, 130, afterAppY + 18);
-        doc.text(`Ph: ${data.mobile_number || ''}`, 130, afterAppY + 24);
+        doc.text('Signature', 140, afterAppY + 5);
+        doc.text('Name', 140, afterAppY + 12);
+        doc.text('Address', 140, afterAppY + 19);
+
+        // Applicant Details filling in Signature (Right Side)
+        doc.text(`${data.name || ''}`, 160, afterAppY + 12);
+        doc.text(`${data.village_town || ''}, Ph: ${data.mobile_number || ''}`, 160, afterAppY + 19);
 
         // Bottom left summary
-        doc.text('Village', 15, afterAppY + 15);
-        doc.text(`:   ${data.village_town}`, 40, afterAppY + 15);
+        doc.text('Village', 15, afterAppY + 25);
+        doc.text(`:   ${data.village_town}`, 45, afterAppY + 25);
 
-        doc.text('Sy.No.', 15, afterAppY + 21);
-        doc.text(`:   ${data.survey_number}`, 40, afterAppY + 21);
+        doc.text('Sy.No.', 15, afterAppY + 31);
+        doc.text(`:   ${data.survey_number}`, 45, afterAppY + 31);
 
-        doc.text('Extent', 15, afterAppY + 27);
-        doc.text(`:   ${data.extent}`, 40, afterAppY + 27);
+        doc.text('Extent', 15, afterAppY + 37);
+        doc.text(`:   ${data.extent}`, 45, afterAppY + 37);
 
-        doc.text('Classification', 15, afterAppY + 33);
-        doc.text(`:   ${data.classification}`, 40, afterAppY + 33);
+        doc.text('Classification', 15, afterAppY + 43);
+        doc.text(`:   ${data.classification}`, 45, afterAppY + 43);
 
         doc.save(`CARD_Requisition_${data.id}.pdf`);
     };
@@ -238,26 +284,55 @@ const Form2 = () => {
                 {/* Details Block combined with applicant */}
 
                 <div className="section-title-bar">
+                    DETAILS OF PROPERTY (URBAN) / <span className="telugu-text">ఆస్తి వివరములు (గృహ సంబంధమైన)</span>
+                </div>
+
+                <table className="card-complex-table" style={{ fontSize: '14px', marginBottom: '10px' }}>
+                    <tbody>
+                        <tr>
+                            <td className="th-like top-border" style={{ width: '15%' }}>Village / Town Name<br /><span className="telugu-text">గ్రామము/పట్టణము పేరు</span></td>
+                            <td className="val-cell top-border" style={{ width: '15%' }}>{data.village_town}</td>
+                            <td className="th-like top-border" style={{ width: '10%' }}>Ward No.<br /><span className="telugu-text">వార్డు నెం.</span></td>
+                            <td className="val-cell top-border" style={{ width: '10%' }}></td>
+                            <td className="th-like top-border" style={{ width: '10%' }}>Block No.<br /><span className="telugu-text">బ్లాక్ నెం.</span></td>
+                            <td className="val-cell top-border" style={{ width: '10%' }}></td>
+                            <td className="th-like top-border no-bottom-border" style={{ width: '15%' }}>Locality<br /><span className="telugu-text">ప్రాంతము</span><br />Habitation Name/నివాస స్థలము</td>
+                            <td className="val-cell top-border no-bottom-border" style={{ width: '15%' }}></td>
+                        </tr>
+                        <tr>
+                            <td className="th-like">Door No.<br /><span className="telugu-text">ఇంటి నం.</span></td>
+                            <td className="val-cell">{data.doorNumber || ''}</td>
+                            <td className="th-like">Extent<br />Sq.yds.<br /><span className="telugu-text">వైశాల్యం చ.గ.</span></td>
+                            <td className="val-cell">{data.extent}</td>
+                            <td className="th-like">Plinth area<br />Sft./కట్టడపు<br /><span className="telugu-text">వైశాల్యము (చ.అ.)</span></td>
+                            <td className="val-cell"></td>
+                            <td className="th-like top-border">Nature of Use<br />Res./Comm.<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
+                            <td className="val-cell top-border">{data.nature_of_use}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div className="section-title-bar mt-4">
                     DETAILS OF PROPERTY (AGRICULTURAL) / <span className="telugu-text">ఆస్తి వివరములు (వ్యవసాయ భూమి)</span>
                 </div>
 
-                <table className="card-complex-table" style={{ fontSize: '18px' }}>
-                    <tbody style={{ fontSize: '18px' }}>
+                <table className="card-complex-table" style={{ fontSize: '14px' }}>
+                    <tbody>
                         <tr>
-                            <td className="th-like top-border" style={{ fontSize: '18px' }}>Village / Town Name<br /><span className="telugu-text">గ్రామము/పట్టణము పేరు</span></td>
-                            <td className="val-cell top-border" style={{ fontSize: '18px' }}>{data.village_town}</td>
-                            <td className="th-like top-border" style={{ fontSize: '18px' }}>Sy. No.<br /><span className="telugu-text">సర్వే నెం.</span></td>
-                            <td className="val-cell top-border" style={{ fontSize: '18px' }}>{data.survey_number}</td>
-                            <td className="th-like no-bottom-border top-border" style={{ fontSize: '18px' }}>Classification<br /><span className="telugu-text">వర్గీకరణ</span></td>
-                            <td className="val-cell no-bottom-border top-border" style={{ fontSize: '18px' }}>{data.classification}</td>
+                            <td className="th-like top-border" style={{ width: '16%' }}>Village / Town Name<br /><span className="telugu-text">గ్రామము/పట్టణము పేరు</span></td>
+                            <td className="val-cell top-border" style={{ width: '17%' }}>{data.village_town}</td>
+                            <td className="th-like top-border" style={{ width: '16%' }}>Sy. No.<br /><span className="telugu-text">సర్వే నెం.</span></td>
+                            <td className="val-cell top-border" style={{ width: '17%' }}>{data.survey_number}</td>
+                            <td className="th-like top-border" style={{ width: '16%' }}>Classification<br /><span className="telugu-text">వర్గీకరణ</span></td>
+                            <td className="val-cell top-border" style={{ width: '18%' }}>{data.classification}</td>
                         </tr>
                         <tr>
-                            <td className="th-like" style={{ fontSize: '18px' }}>Extent<br /><span className="telugu-text">విస్తీర్ణము</span></td>
-                            <td className="val-cell" style={{ fontSize: '18px' }}>{data.extent}</td>
-                            <td className="th-like" style={{ fontSize: '18px' }}>Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
-                            <td className="val-cell" style={{ fontSize: '18px' }}>{data.nature_of_use}</td>
-                            <td className="th-like top-border" style={{ fontSize: '18px' }}>Door No. / Habitation Name<br /><span className="telugu-text">ఇంటి నంబరు / నివాస స్థలము</span></td>
-                            <td className="val-cell top-border" style={{ fontSize: '18px' }}>{data.doorNumber || ''}</td>
+                            <td className="th-like">Units<br /><span className="telugu-text">యూనిట్స్</span></td>
+                            <td className="val-cell"></td>
+                            <td className="th-like">Nature of use<br /><span className="telugu-text">ఏ ఉపయోగమునకు వర్తించు</span></td>
+                            <td className="val-cell">{data.nature_of_use}</td>
+                            <td className="th-like">Habitation Name<br /><span className="telugu-text">నివాస స్థలము</span></td>
+                            <td className="val-cell">{data.doorNumber || ''}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -266,62 +341,49 @@ const Form2 = () => {
                 <div className="section-title-bar mt-4">
                     DETAILS OF STRUCTURE / <span className="telugu-text">కట్టడముల వివరములు</span>
                 </div>
-                <table className="card-complex-table">
+                <table className="card-complex-table" style={{ fontSize: '14px' }}>
                     <tbody>
                         <tr>
-                            <td className="text-center">Flat (y/n)<br /><span className="telugu-text">ఫ్లాట్ (అ/కా)</span></td>
-                            <td>Name of Apartment<br /><span className="telugu-text">అపార్ట్మెంట్ పేరు</span></td>
-                            <td className="text-center" colSpan={2}>Flat No.<br /><span className="telugu-text">ఫ్లాట్ నెం.</span></td>
-                            <td className="text-center" colSpan={2}>Total No. of Floors<br /><span className="telugu-text">మొత్తం అంతస్తులు</span></td>
+                            <td className="text-center" style={{ width: '15%' }}>Flat (y/n)<br /><span className="telugu-text">ఫ్లాట్ (అ/కా)</span></td>
+                            <td style={{ width: '10%' }}></td>
+                            <td className="text-center" style={{ width: '20%' }}>Name of Apartment<br /><span className="telugu-text">అపార్ట్మెంట్ పేరు</span></td>
+                            <td style={{ width: '20%' }}></td>
+                            <td className="text-center" style={{ width: '10%' }}>Flat No.<br /><span className="telugu-text">ఫ్లాట్ నెం.</span></td>
+                            <td style={{ width: '10%' }}></td>
+                            <td className="text-center" style={{ width: '15%' }}>Total No. of Floors<br /><span className="telugu-text">మొత్తం అంతస్తులు</span></td>
+                            <td style={{ width: '10%' }}></td>
                         </tr>
                         <tr className="sub-headers">
-                            <td className="text-center">Floor No.<br /><span className="telugu-text">అంతస్తు నెం.</span></td>
-                            <td className="text-center">Type of Structure<br /><span className="telugu-text">కట్టడముల స్వభావము</span></td>
-                            <td className="text-center">Plinth Area in Sft./<br /><span className="telugu-text">కట్టడపు వైశాల్యము(చ.అ.)</span></td>
+                            <td className="text-center" colSpan={1}>Floor No.<br /><span className="telugu-text">అంతస్తు నెం.</span></td>
+                            <td className="text-center" colSpan={2}>Type of Structure<br /><span className="telugu-text">కట్టడముల స్వభావము</span></td>
+                            <td className="text-center" colSpan={2}>Plinth Area in Sft./<br /><span className="telugu-text">కట్టడపు వైశాల్యము(చ.అ.)</span></td>
                             <td className="text-center" colSpan={2}>Stage of Construction<br /><span className="telugu-text">నిర్మాణ దశ</span></td>
-                            <td className="text-center">Age of the Building in Years<br /><span className="telugu-text">కట్టడముల వయస్సు సంవత్సరములలో</span></td>
+                            <td className="text-center" colSpan={1}>Age of the Building in Years<br /><span className="telugu-text">కట్టడముల వయస్సు సంవత్సరములలో</span></td>
                         </tr>
-                        <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
-                        <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
-                        <tr style={{ height: '25px' }}><td></td><td></td><td></td><td colSpan={2}></td><td></td></tr>
+                        <tr style={{ height: '30px' }}><td colSpan={1}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={1}></td></tr>
+                        <tr style={{ height: '30px' }}><td colSpan={1}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={1}></td></tr>
+                        <tr style={{ height: '30px' }}><td colSpan={1}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={1}></td></tr>
+                        <tr style={{ height: '30px' }}><td colSpan={1}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={2}></td><td colSpan={1}></td></tr>
                     </tbody>
                 </table>
 
-                <div className="card-signature-area mt-4">
-                    <div className="left-sig">
-                        Date / <span className="telugu-text">తేది.</span> : {formattedDate}
-                    </div>
-                    <div className="right-sig" style={{ textAlign: 'center', width: '250px' }}>
-                        Signature<br /><br />
-                        <div style={{ textAlign: 'left', marginTop: '10px' }}>
-                            {data.name}<br />
-                            {data.relation_type}: {data.father_name}<br />
-                            Ph: {data.mobile_number}
+                <div className="card-signature-area" style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', borderTop: '2px solid #000', paddingTop: '10px' }}>
+                    <div className="left-sig" style={{ fontSize: '15px' }}>
+                        Date / <span className="telugu-text">తేది.</span><br />
+                        Date : {formattedDate}<br />
+                        <br />
+                        <div style={{ display: 'grid', gridTemplateColumns: 'min-content 1fr', gap: '5px 20px', marginTop: '10px' }}>
+                            <span>Village</span><span>: &nbsp;{data.village_town}</span>
+                            <span>Sy.No.</span><span>: &nbsp;{data.survey_number}</span>
+                            <span>Extent</span><span>: &nbsp;{data.extent}</span>
+                            <span>Classification</span><span>: &nbsp;{data.classification}</span>
                         </div>
                     </div>
-                </div>
-
-                <div className="card-summary-bottom" style={{ marginTop: '-70px' }}>
-                    <table className="summary-print-table">
-                        <tbody>
-                            <tr>
-                                <td style={{ width: '120px' }}>Village</td>
-                                <td>: {data.village_town}</td>
-                            </tr>
-                            <tr>
-                                <td>Sy.No.</td>
-                                <td>: {data.survey_number}</td>
-                            </tr>
-                            <tr>
-                                <td>Extent</td>
-                                <td>: {data.extent}</td>
-                            </tr>
-                            <tr>
-                                <td>Classification</td>
-                                <td>: {data.classification}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="right-sig" style={{ textAlign: 'left', width: '300px', fontSize: '15px' }}>
+                        <div style={{ display: 'flex', marginBottom: '5px' }}><span style={{ width: '80px' }}>Signature</span></div>
+                        <div style={{ display: 'flex', marginBottom: '5px' }}><span style={{ width: '80px' }}>Name</span><span style={{ fontWeight: 'normal' }}>{data.name}</span></div>
+                        <div style={{ display: 'flex', marginBottom: '5px' }}><span style={{ width: '80px' }}>Address</span><span style={{ fontWeight: 'normal' }}>{data.village_town}, Ph: {data.mobile_number}</span></div>
+                    </div>
                 </div>
             </div>
 
